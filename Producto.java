@@ -8,6 +8,20 @@ public class Producto {
 
     // Constructor: inicializa los valores del producto cuando se crea un objeto.
     public Producto(String nombre, double precio, int stock) {
+        // Si no pusieron un nombre no deja cargar el producto
+        if (nombre == null || nombre.trim().isEmpty()){
+            throw new IllegalArgumentException("No se puede cargar un producto sin un nombre.");
+        }
+        //  Regla que hace que no puedan  cargar un precio negativo 
+        if (precio < 0) {
+            throw new IllegalArgumentException("No se puede cargar un producto con un precio negativo.");
+
+        }
+     //Regla que hace que no puedan  cargar un stock  negativo 
+        if (stock < 0 ){
+            throw new IllegalArgumentException("No se puede cargar el stock con un numero negativo");
+
+        }
         this.nombre = nombre; // Asigna el nombre recibido al atributo nombre.
         this.precio = precio; // Asigna el precio recibido al atributo precio.
         this.stock = stock; // Asigna el stock recibido al atributo stock.
