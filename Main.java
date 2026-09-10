@@ -51,13 +51,33 @@ public class Main extends JFrame {
 
     // Método que toma los datos ingresados y crea un objeto Producto.
     private void registrarProducto() {
+            try{
         String nombre = txtNombre.getText(); // Obtiene el nombre escrito por el usuario.
         double precio = Double.parseDouble(txtPrecio.getText()); // Convierte el texto del precio a double.
         int stock = Integer.parseInt(txtStock.getText()); // Convierte el texto del stock a int.
 
         Producto producto = new Producto(nombre, precio, stock); // Crea un producto con los datos ingresados.
         txtResultado.setText(producto.mostrarInformacion()); // Muestra la información del producto en el área de texto.
+    } 
+    // Salta si el precio o el stock no son numeros validos
+    catch (NumberFormatException ex ){
+        JOptionPane.showMessageDialog(this ,
+            " El precio y el stock deben ser valores numericos .",
+            "Error de formato",
+            JOptionPane.ERROR_MESSAGE);
+        
     }
+    // Salta si Producto rechaza los datos (nombre vacio, negativos)
+    catch (IllegalArgumentException ex) {
+
+     JOptionPane.showMessageDialog(this ,
+        ex.getMessage(),
+        "Datos invalidos",
+        JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
 
     // Método principal que inicia la aplicación.
     public static void main(String[] args) {
